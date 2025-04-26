@@ -1,0 +1,15 @@
+[project]
+name = "devto-mcp-server"
+version = "0.1.0"
+description = "Model Context Protocol server implementation for Dev.to to allow AI assistants to access and interact with Dev.to content"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Arindam Majumder"}
+]
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.6.0",
+    "requests>=2.32.3",
+]
