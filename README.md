@@ -2,7 +2,7 @@
 
 This repository contains a Model Context Protocol server implementation for Dev.to that allows AI assistants to access and interact with Dev.to content.
 
-![image](https://github.com/user-attachments/assets/f7f759a2-e79d-473c-9f3c-66da92fff2fe)
+![image](./Demo.png)
 
 ## What is MCP?
 
