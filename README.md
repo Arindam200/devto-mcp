@@ -62,7 +62,7 @@ cd devto-mcp
    ~/.cursor/mcp.json
    ```
 
-4. **Restart Claude Desktop / Cursor**
+3. **Restart Claude Desktop / Cursor**
 
    Open Claude Desktop and you should now see WhatsApp as an available integration.
 
