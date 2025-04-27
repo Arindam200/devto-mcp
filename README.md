@@ -2,9 +2,11 @@
 
 This repository contains a Model Context Protocol server implementation for Dev.to that allows AI assistants to access and interact with Dev.to content.
 
+![image](https://github.com/user-attachments/assets/f7f759a2-e79d-473c-9f3c-66da92fff2fe)
+
 ## What is MCP?
 
-The Model Context Protocol (MCP) is a standard for enabling AI assistants to interface with external services, tools, and data sources. This server implements the MCP specification to provide access to Dev.to content.
+The Model Context Protocol (MCP) is a standard for enabling AI assistants to interface with external services, tools, and data sources. This server implements the MCP specification to provide access to Dev.to content. To know more about MCP, Check this [video](https://www.youtube.com/watch?v=BwB1Jcw8Z-8)
 
 ## Features
 
