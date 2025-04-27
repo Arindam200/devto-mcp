@@ -64,7 +64,7 @@ cd devto-mcp
 
 3. **Restart Claude Desktop / Cursor**
 
-   Open Claude Desktop and you should now see WhatsApp as an available integration.
+   Open Claude Desktop and you should now see Devto as an available integration.
 
    Or restart Cursor.
 
