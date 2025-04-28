@@ -2,6 +2,10 @@
 
 This repository contains a Model Context Protocol server implementation for Dev.to that allows AI assistants to access and interact with Dev.to content.
 
+<a href="https://glama.ai/mcp/servers/@Arindam200/devto-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@Arindam200/devto-mcp/badge" alt="Dev.to Server MCP server" />
+</a>
+
 ![image](./Demo.png)
 
 ## What is MCP?
