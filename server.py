@@ -20,6 +20,7 @@ mcp = FastMCP(
     - `get_articles_by_username(username)` - Get articles written by a specific author
     - `create_article(title, body_markdown, tags, published)` - Create and publish a new article
     - `update_article(article_id, title, body_markdown, tags, published)` - Update an existing article
+    - `get_user_info(username)` - Get information about a Dev.to user
     
     ## When to use what
     - For browsing recent content: Use `get_latest_articles()` 
@@ -30,6 +31,7 @@ mcp = FastMCP(
     - For full article content: Use `get_article_details(article_id)` or `get_article_by_id(id)`
     - For publishing new content: Use `create_article(title, body_markdown, tags, published)`
     - For updating existing content: Use `update_article(article_id, title, body_markdown, tags, published)`
+    - For user profiles: Use `get_user_info(username)`
     
     ## Example Queries
     - "Find articles about Python on Dev.to" → Use `search_articles("Python")` or `get_articles_by_tag("python")`
@@ -38,6 +40,15 @@ mcp = FastMCP(
     - "Find articles by author ben" → Use `get_articles_by_username("ben")`
     - "Create a new article about Python" → Use `create_article("My Python Article", "# Python\nContent here...", "python,webdev", false)`
     - "Update my article with ID 1234" → Use `update_article(1234, "New Title", "Updated content...")`
+    - "Get user info for username dev_user" → Use `get_user_info("dev_user")`
+
+    ## Notes
+    - Ensure you have a valid Dev.to API key set in the environment variable `DEV_TO_API_KEY`.
+    - The API key is required for creating and updating articles.
+    - The API key can be obtained from your Dev.to account settings.
+    - The API key should be kept secret and not shared publicly.
+    - The API key is used to authenticate requests to the Dev.to API.
+
     """
 )
 
@@ -92,7 +103,6 @@ async def search_articles(query: str, page: int = 1) -> str:
     """
     articles = await fetch_from_api("/articles", params={"page": page})
     
-    # Simple client-side filtering since Dev.to API doesn't have a search endpoint
     filtered_articles = [
         article for article in articles 
         if query.lower() in article.get("title", "").lower() or 
@@ -122,6 +132,22 @@ async def get_articles_by_username(username: str) -> str:
     """
     articles = await fetch_from_api("/articles", params={"username": username})
     return format_articles(articles[:10])
+
+@mcp.tool()
+async def get_user_info(username: str) -> str:
+    """
+    Get information about a Dev.to user
+    
+    Args:
+        username: The username of the user
+    """
+    try:
+        user = await fetch_from_api(f"/users/{username}")
+        return format_user_profile(user)
+    except httpx.HTTPStatusError as e:
+        if e.response.status_code == 404:
+            return f"User {username} not found."
+        raise e
 
 @mcp.tool()
 async def create_article(title: str, body_markdown: str, tags: str = "", published: bool = False) -> str:
@@ -239,6 +265,40 @@ def format_article_details(article: dict) -> str:
     result += body
     
     return result
+
+def format_user_profile(user: dict) -> str:
+    """Format a user profile for display"""
+    if not user:
+        return "User not found."
+    
+    username = user.get("username", "Unknown")
+    name = user.get("name", "Unknown")
+    bio = user.get("summary", "No bio available.")
+    twitter = user.get("twitter_username", "")
+    github = user.get("github_username", "")
+    website = user.get("website_url", "")
+    location = user.get("location", "")
+    joined = user.get("joined_at", "")
+    
+    result = f"# {name} (@{username})\n\n"
+    result += f"Bio: {bio}\n\n"
+    
+    result += "## Details\n"
+    if location:
+        result += f"Location: {location}\n"
+    if joined:
+        result += f"Member since: {joined}\n"
+    
+    result += "\n## Links\n"
+    if twitter:
+        result += f"Twitter: @{twitter}\n"
+    if github:
+        result += f"GitHub: {github}\n"
+    if website:
+        result += f"Website: {website}\n"
+    
+    return result
+
 
 if __name__ == "__main__":
     print("Starting Dev.to MCP server...")

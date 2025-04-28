@@ -13,6 +13,7 @@ The Model Context Protocol (MCP) is a standard for enabling AI assistants to int
 - Fetch latest and trending articles from Dev.to
 - Search for articles by various criteria
 - Get detailed information about specific articles
+- Get Detailed information about a User.
 - Access articles by tag or username
 - Create and publish new articles to Dev.to
 - Update existing articles
