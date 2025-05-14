@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/arindam200-devto-mcp-badge.png)](https://mseep.ai/app/arindam200-devto-mcp)
+
 # Dev.to MCP Server
 
 This repository contains a Model Context Protocol server implementation for Dev.to that allows AI assistants to access and interact with Dev.to content.
