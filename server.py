@@ -3,54 +3,7 @@ from mcp.server.fastmcp import FastMCP, Context
 import os
 
 # Create a Dev.to MCP server
-mcp = FastMCP(
-    "Dev.to API", 
-    instructions="""
-    # Dev.to API Server
-    
-    This server provides access to Dev.to content through various tools.
-    
-    ## Available Tools
-    - `get_latest_articles()` - Get the latest articles from Dev.to
-    - `get_top_articles()` - Get the most popular articles from Dev.to
-    - `get_articles_by_tag(tag)` - Get articles by tag
-    - `get_article_by_id(id)` - Get a specific article by ID
-    - `search_articles(query, page=1)` - Search for articles by keywords in title/description
-    - `get_article_details(article_id)` - Get full content and metadata for a specific article
-    - `get_articles_by_username(username)` - Get articles written by a specific author
-    - `create_article(title, body_markdown, tags, published)` - Create and publish a new article
-    - `update_article(article_id, title, body_markdown, tags, published)` - Update an existing article
-    - `get_user_info(username)` - Get information about a Dev.to user
-    
-    ## When to use what
-    - For browsing recent content: Use `get_latest_articles()` 
-    - For popular content: Use `get_top_articles()`
-    - For articles on specific topics: Use `get_articles_by_tag(tag)` with the tag name
-    - For searching by keywords: Use `search_articles(query)`
-    - For author-specific content: Use `get_articles_by_username(username)`
-    - For full article content: Use `get_article_details(article_id)` or `get_article_by_id(id)`
-    - For publishing new content: Use `create_article(title, body_markdown, tags, published)`
-    - For updating existing content: Use `update_article(article_id, title, body_markdown, tags, published)`
-    - For user profiles: Use `get_user_info(username)`
-    
-    ## Example Queries
-    - "Find articles about Python on Dev.to" → Use `search_articles("Python")` or `get_articles_by_tag("python")`
-    - "Show me the latest Dev.to articles" → Use `get_latest_articles()`
-    - "Get details for article 1234" → Use `get_article_by_id("1234")` or `get_article_details(1234)`
-    - "Find articles by author ben" → Use `get_articles_by_username("ben")`
-    - "Create a new article about Python" → Use `create_article("My Python Article", "# Python\nContent here...", "python,webdev", false)`
-    - "Update my article with ID 1234" → Use `update_article(1234, "New Title", "Updated content...")`
-    - "Get user info for username dev_user" → Use `get_user_info("dev_user")`
-
-    ## Notes
-    - Ensure you have a valid Dev.to API key set in the environment variable `DEV_TO_API_KEY`.
-    - The API key is required for creating and updating articles.
-    - The API key can be obtained from your Dev.to account settings.
-    - The API key should be kept secret and not shared publicly.
-    - The API key is used to authenticate requests to the Dev.to API.
-
-    """
-)
+mcp = FastMCP("Dev.to MCP Server")
 
 # Constants
 BASE_URL = "https://dev.to/api"
@@ -210,18 +163,6 @@ async def update_article(article_id: int, title: str = None, body_markdown: str 
     
     return f"Article updated successfully\nURL: {updated_article.get('url')}"
 
-# Prompts
-
-@mcp.prompt()
-def search_prompt(query: str) -> str:
-    """Create a search prompt for Dev.to articles"""
-    return f"Please search for articles on Dev.to about {query} and summarize the key findings."
-
-@mcp.prompt()
-def analyze_article(article_id: str) -> str:
-    """Create a prompt to analyze a specific article"""
-    return f"Please analyze the Dev.to article with ID {article_id} and provide a summary of its key points and insights."
-
 # Helper formatting functions
 
 def format_articles(articles: list) -> str:
@@ -298,6 +239,7 @@ def format_user_profile(user: dict) -> str:
         result += f"Website: {website}\n"
     
     return result
+
 
 
 if __name__ == "__main__":

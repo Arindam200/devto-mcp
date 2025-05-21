@@ -23,6 +23,8 @@ The Model Context Protocol (MCP) is a standard for enabling AI assistants to int
 - Update existing articles
 - Caching mechanism to improve performance and reduce API calls
 
+
+
 ## Installation
 
 1. Clone this repository
@@ -98,16 +100,6 @@ Here are some examples of what you can ask an AI assistant connected to this ser
 - "Search for articles about machine learning"
 - "Create a new article titled 'Getting Started with Python'"
 - "Update my article with ID 5678 to fix a typo in the content"
-
-## Advanced Features
-
-
-### Custom Prompts
-
-The server provides pre-defined prompts that can be used by AI assistants:
-
-- `search_prompt` - Create a formatted search prompt
-- `analyze_article` - Create a prompt to analyze a specific article
 
 ## Authentication
 
